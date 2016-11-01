@@ -3,20 +3,20 @@ from bs4 import BeautifulSoup as bs
 
 
 def get_job_name():
-    return raw_input("Enter job name: ")
+    return raw_input("Enter job name: ")  # comment1
 
 
 def check_pages(link):
     html = urllib2.urlopen(link).read()
     soup = bs(html, "lxml")
-    page_no = soup.find_all('a', class_="desktopPagin_item_link")
-    if page_no == []:
+    page_no = soup.find_all('a', class_="desktopPagin_item_link")  # finds all tags for Paging,
+    if page_no == []:  # returns 1 if no Paging tags are found
         return 1
     else:
         last_page = []
         for p in page_no:
             last_page.append(p.get('href')[-1])
-        return int(last_page[-2])
+        return int(last_page[-2])  # returns number of Paging tags
 
 
 def create_first_link(job_name):
